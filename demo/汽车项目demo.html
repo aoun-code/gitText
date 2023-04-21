@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="js/tf.js"></script>
+    <script src="js/navData.js"></script>
+    <!-- <script src="./js/tf.js"></script> -->
+</head>
+<style>
+    .banner .sortShow {
+
+        margin: 10px auto;
+        background-color: skyblue;
+    }
+
+    .banner .sortBox {
+        height: 100px;
+        width: 1300px;
+        margin: 20px auto;
+        background-color: skyblue;
+    }
+
+    .banner .sortBox li {
+        float: left;
+        height: 30px;
+        margin-left: 50px;
+        margin-top: 30px;
+        background-color: red;
+        text-align: center;
+        line-height: 30px;
+    }
+    .banner .sortBox li button{
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 版图 -->
+        <div class="banner">
+            <!-- 导航栏 -->
+
+            <div class="guide">
+                <a href="#" class="headline">
+                    <button @click="addressBtn()">全国</button>
+                </a>
+                <ul>
+                    <li v-for="(items , index) in guideLan">
+                        <a href="#">{{items}}</a>
+                    </li>
+
+                </ul>
+                <a href="#" class="headline2">
+                    咨询电话<span>400-0606-777</span>
+                </a>
+            </div>
+            <div class="loading" v-show="flag">
+                <h2>选择城市</h2>
+                <span class="back" @click="addressBtn1()">X</span>
+            </div>
+            <!-- 筛选 -->
+            <!-- <div class="sort">
+                <div class="wrap">
+                    <div class="box-wrap" v-for="(items, index) in arr4">
+                        <span class="title">{{items.name}}</span>
+                        <span class="item" v-for="(a, b) in items.data" @click="addBtn($event,index)">{{a}}</span>
+                    </div>
+                </div>
+            </div> -->
+
+
+
+            <!-- ==================================================== -->
+            <div class="sort">
+                <div class="wrap">
+                    <div class="box-wrap" v-for="(items, index) in arr4">
+                        <span class="title">{{items.name}}</span>
+                        <span class="item" v-for="(a, b) in items.data" @click="addBox(a,index)">{{a}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+            <div class="sortBox">
+                <ul>
+                    <li> 筛选条件</li>
+                    <li v-for="(v, i) in listData" v-show="v">{{v}}
+                        <span @click="delBox(i)">X</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- <div class="sortShow">
+                <span v-show="sortFlag">这是跳出的内容: {{btnText}}</span>
+            </div> -->
+
+            <!-- <div class="sortBox" v-show="sortFlag">
+                <ul>
+                    <li>Shaixuan筛选条件: <button @click="sortFlag = !sortFlag"><strong>X</strong></button></li>
+                    <li v-show="btnText1Flag">Pingpai品牌: {{btnText1}}<button @click="btnText1Flag=!btnText1Flag"><strong>X</strong></button></li>
+                    <li v-show="btnText2Flag">Chexing车型: {{btnText2}}<button @click="btnText2Flag=!btnText2Flag"><strong>X</strong></button></li>
+                    <li v-show="btnText3Flag">Jiage价格: {{btnText3}}<button @click="btnText3Flag=!btnText3Flag"><strong>X</strong></button></li>
+                </ul>
+            </div> -->
+            <!-- 商品图 -->
+            <div class="app1">
+                <div class="item">
+                    <ul>
+                        <li v-for="(items, index) in arr3">
+                            <img src="imgs/course01.png" alt="">
+                            <div class="wenzi">
+                                <a href="#">{{items.carName}}</a>
+                                <a href="#">{{getDate(items.dcontentateOfRegistration)}}</a>
+                                <span>{{items.currentPrice+"万"}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        let app = Vue.createApp({
+            data() {
+                return {
+                    btnText1: '',
+                    btnText2: '',
+                    btnText3: '',
+                    btnText1Flag: true,
+                    btnText2Flag: true,
+                    btnText3Flag: true,
+                    sortFlag: false,
+                    flag: false,
+                    arr1: [1, 2, 3],
+                    arr2: ['a', 'b', 'c', 'd'],
+                    navList: ['首页', '二手车', '新车', '卖车', '腾发金融', '腾发服务'],
+                    guideLan: ['首页', '二手车', '新车', '卖车', '腾发金融', '腾发服务'],
+                    arr3: lisData.data.content,
+                    arr4: navData,
+                    listData: ['不限','不限','不限']
+                };
+            },
+            methods: {
+                addBox(a, b){
+                    this.listData[b] = a
+                },
+                delBox(i){
+                    this.listData[i] = ''
+                },
+
+
+
+
+
+                addressBtn() {
+                    this.flag = true
+                },
+                addressBtn1() {
+                    this.flag = false
+                },
+                getDate(id) {
+                    let d = new Date(id);
+                    return (
+                        d.getFullYear() + "年" +
+                        (d.getMonth() + 1 >= 10 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)) + "月"
+                    );
+                },
+                onBtn() {
+
+                },
+                addBtn(event, index) {
+                    if (event.target.innerText !== '不限') {
+                        switch (index) {
+                            case 0:
+                                this.btnText1 = String(event.target.innerText)
+                                this.btnText1Flag = true
+                                break
+                            case 1:
+                                this.btnText2 = String(event.target.innerText)
+                                this.btnText2Flag = true
+                                break
+                            case 2:
+                                this.btnText3 = String(event.target.innerText)
+                                this.btnText3Flag = true
+                                break
+                            default:
+                                alert(`失败,index=${index}`)
+                        }
+                    }else {
+                        
+                    }
+                    // this.btnText = String(event.target.innerText)
+                    this.sortFlag = true
+                },
+
+            },
+        });
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

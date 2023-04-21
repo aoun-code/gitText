@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝网-淘!我喜欢</title>
+    <link rel="stylesheet" href="./css/taobao.css">
+</head>
+
+<body>
+    <div class="colomn">
+        <div class="header">
+            <div class="header-left">
+                <div class="isSelect" style="display: inline-block;">
+                    <span class="header-left-select">
+                        <span class="address">中国大陆</span>
+                        <span style="transform: rotate(90deg);">></span>
+                    </span>
+                    <!-- 展开菜单栏 -->
+                    <ul>
+                        <li>全球</li>
+                        <li>中国大陆</li>
+                        <li>中国香港</li>
+                        <li>中国台湾</li>
+                    </ul>
+                </div>
+                <span>
+                    <span style="color: red;margin-right: 1px;">亲，请登录</span>
+                    <span>免费注册</span></span>
+                <span>手机逛淘宝</span>
+                <span>网页无障碍</span>
+            </div>
+            <div class="header-right">
+                <span>我的淘宝<span style="transform: rotate(90deg);">></span></span>
+                <span>
+                    <div class="q-header-right">
+                        <img src="./imgs/购物车.png">购物车
+                    </div>
+                </span>
+                <span>
+                    <div class="q-header-right">
+                        <img src="./imgs/收藏.png" style="width: 15px;">收藏夹
+                        <span style="transform: rotate(90deg);">></span>
+                    </div>
+                </span>
+                <span>
+                    <span style="margin-right: 1px;">商品分类</span>
+                    <span>免费开店</span></span>
+                </span>
+                <span>|</span>
+                <span>千牛卖家中心<span style="transform: rotate(90deg);">></span></span>
+                <span>联系客服<span style="transform: rotate(90deg);">></span></span>
+            </div>
+        </div>
+        <div class="search">
+            <div class="search-icon">
+                <img src="./imgs/淘宝网.png" alt="" style="width: 150px;">
+                <div class="icon">taobao</div>
+            </div>
+            <div>
+                <div class="search-input-top">
+                    <span style="margin: 0 5px 0 10px;">宝贝</span>
+                    <span style="color: #f3f0f0;">|</span>
+                    <input type="text" placeholder="零食">
+                    <button>搜索</button>
+                    <div class="search-input-bottom">
+                        <span>新款连衣裙</span>
+                        <span>四件套</span>
+                        <span>潮流T恤</span>
+                        <span>时尚女鞋</span>
+                        <span>短裤</span>
+                        <span>半身裙</span>
+                        <span>男士外套</span>
+                        <span>墙纸</span>
+                        <span>行车记录仪</span>
+                        <span>新款男鞋</span>
+                    </div>
+                </div>
+            </div>
+            <div class="erweima">
+                <p style="font-size: 12px;color: red;">下载淘宝</p>
+                <img src="./imgs/下载.png" alt="" style="margin-top:10px;width: 50px;">
+            </div>
+        </div>
+        <div class="warpper">
+
+        </div>
+    </div>
+    <script>
+        let isSelect = document.querySelector('.isSelect')//是否在选择地址
+        const headerSelect = document.querySelector('.header-left-select')
+        const ulSelect = document.querySelector('.header-left ul')
+        const address = document.querySelector('.address')
+        isSelect.addEventListener('mouseleave', function () {
+            headerSelect.style.backgroundColor = '#f5f5f5'
+            ulSelect.style.display = 'none'
+        })
+        headerSelect.addEventListener('mouseenter', function () {
+            headerSelect.style.backgroundColor = 'white'
+            ulSelect.style.display = 'block'
+        })
+        ulSelect.addEventListener('mouseleave', function () {
+            headerSelect.style.backgroundColor = '#f5f5f5'
+            ulSelect.style.display = 'none'
+        })
+        ulSelect.addEventListener('click', function (event) {
+            // console.log(event.target.innerText)
+            ulSelect.style.display = 'none'
+            address.innerText = event.target.innerText
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/data.js"></script>
+    <link rel="stylesheet" href="./css/index1.css">
+</head>
+<body>
+    <div id="root" class="root">
+        <ul>
+            <li v-for="(items, index) in arr1" v-show="isTrue(items.tsToolType)">
+                <!-- {{items.tsToolType}} -->
+                <span>applyNo编号：</span><br>
+                <span>{{items.applyNo}}</span><br>
+                
+                <span>maktx仪器名称: </span><br>
+                <span>{{items.maktx}}</span><br>
+                <span>是否消耗品: </span><br>
+                <!-- <span>{{items.isConsume}}{{isCons(items.isConsume)}}</span><br> -->
+                <!-- <span>{{items.isConsume == '1' ? '是' : '否'}}</span> -->
+                <span v-if="items.isConsume == '1'">是</span>
+                <span v-else>否</span>
+            </li>
+            
+        </ul>
+    </div>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    arr1: data.data.rows
+                }
+            },
+            methods: {
+                isTrue(num){
+                    if(num === "1"){
+                        return true
+                    }else {
+                        return false
+                    }
+                },
+                isCons(a){
+                    return a == "1"? "是消耗品" : "不是消耗品"
+                },
+            },
+            created() {
+                console.log(data.data.rows)
+                
+            },
+        });
+        app.mount("#root");
+    </script>
+</body>
+</html>
